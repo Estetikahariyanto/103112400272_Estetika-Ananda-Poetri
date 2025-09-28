@@ -233,8 +233,7 @@ int main() {
 ##### Output 1
 ![alt text](output/output-unguided1-modul1.png)
 
-
-penjelasan unguided 1 
+Program di atas sederhana, fungsinya untuk menghitung operasi aritmatika antara dua bilangan yang diinput user (penjumlahan, pengurangan, perkalian, dan pembagian). Kalau bilangan kedua = 0, program menampilkan pesan error karena tidak bisa dibagi nol. 
 
 ### 2. (isi dengan soal unguided 2)
 
