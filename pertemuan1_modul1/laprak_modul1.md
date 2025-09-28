@@ -203,12 +203,35 @@ jadi, struct rapot itu seperti wadah custom  yang isinya hanya ada nama sama nil
 ### 1. Buatlah program yang menerima input an dua buah bilangan bertipe float, kemudian memberikan output an hasil penjumlahan, pengurangan, perkalian, dan pembagian dari dua bilangan tersebut.
 
 ```C++
-source code unguided 1
+#include <iostream>
+using namespace std;
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    float angka1, angka2;
+    cout << "masukkan bilangan pertama : ";
+    cin >> angka1;
+    cout << "masukkan bilangan kedua   : ";
+    cin >> angka2;
+
+    cout << "\nHasil Penjumlahan : " << angka1 + angka2 << endl;
+    cout << "hasil Pengurangan : " << angka1 - angka2 << endl;
+    cout << "hasil Perkalian   : " << angka1 * angka2 << endl;
+
+    if (angka2 != 0) {
+        cout << "hasil Pembagian   : " << angka1 / angka2 << endl;
+    } else {
+        cout << "hasil Pembagian   : Error (pembagian dengan nol tidak terdefinisi)" << endl;
+    }
+    return 0;
+}
 ```
 ### Output Unguided 1 :
 
 ##### Output 1
-![Screenshot Output Unguided 1_1](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
+![![C:\ESTETIKA ANANDA\STRUKTUR DATA PRAKTIKUM\103112400272_Estetika-Ananda-Poetri\pertemuan1_modul1\output\output-unguided1-modul1.png](output/output-unguided1-modul1.png)](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
 
 contoh :
 ![Screenshot Output Unguided 1_1](https://github.com/DhimazHafizh/2311102151_Muhammad-Dhimas-Hafizh-Fathurrahman/blob/main/Pertemuan1_Modul1/Output-Unguided1-1.png)
