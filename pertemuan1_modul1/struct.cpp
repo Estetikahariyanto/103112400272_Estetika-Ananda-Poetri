@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    const int jumlah = 3; // contoh, biar nggak kepanjangan
+    const int jumlah = 3; // contoh, biar ga kepanjangan
 
     struct rapot {
         string nama;
