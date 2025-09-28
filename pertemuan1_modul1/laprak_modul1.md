@@ -235,46 +235,108 @@ int main() {
 
 Program di atas sederhana, fungsinya untuk menghitung operasi aritmatika antara dua bilangan yang diinput user (penjumlahan, pengurangan, perkalian, dan pembagian). Kalau bilangan kedua = 0, program menampilkan pesan error karena tidak bisa dibagi nol. 
 
-### 2. (isi dengan soal unguided 2)
+### 2. Buatlah sebuah program yang menerima masukan angka dan mengeluarkan output nilai angka tersebut dalam bentuk tulisan. Angka yang akan di-input-kan user adalah bilangan bulat positif mulai dari 0 s.d 100. Contoh 79 = Tujuh Puluh Sembilan.
 
 ```C++
-source code unguided 2
+#include <iostream>
+using namespace std;
+
+string satuan[] = {"", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan"};
+string belasan[] = {"sepuluh", "sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", 
+                    "enam belas", "tujuh belas", "delapan belas", "sembilan belas"};
+
+string terbilang(int n) {
+    if (n == 0) return "nol";
+    if (n == 100) return "seratus";
+    if (n < 10) return satuan[n];
+    if (n < 20) return belasan[n - 10];
+    if (n < 100) {
+        int puluh = n / 10;
+        int sisa = n % 10;
+        string hasil = satuan[puluh] + " puluh";
+        if (sisa > 0) hasil += " " + satuan[sisa];
+        return hasil;
+    }
+    return "";
+}
+
+int main() {
+    int angka;
+    cout << "Masukkan angka (0-100): ";
+    cin >> angka;
+
+    if (angka < 0 || angka > 100) {
+        cout << "Angka di luar jangkauan!" << endl;
+    } else {
+        cout << angka << " : " << terbilang(angka) << endl;
+    }
+    return 0;
+}
 ```
 ### Output Unguided 2 :
 
 ##### Output 1
-![Screenshot Output Unguided 2_1](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
+![alt text](output/output-unguided2-modul1.png)
 
-contoh :
-![Screenshot Output Unguided 2_1](https://github.com/DhimazHafizh/2311102151_Muhammad-Dhimas-Hafizh-Fathurrahman/blob/main/Pertemuan1_Modul1/Output-Unguided2-1.png)
+Program ini membaca angka dari user (0–100), lalu mengubah angka tersebut menjadi tulisan bahasa Indonesia, misalnya input 79 akan ditampilkan sebagai “79 : tujuh puluh sembilan”.
 
-##### Output 2
-![Screenshot Output Unguided 2_2](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
-
-penjelasan unguided 2
-
-### 3. (isi dengan soal unguided 3)
+### 3. Buatlah Program yang dapat memberikan input dan output
+input : 3
+output :
+3 2 1 * 1 2 3
+2 1 * 1 2
+1 * 1
+*
+(mirror)
 
 ```C++
-source code unguided 3
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "input: ";
+    cin >> n;
+
+    for (int i = n; i >= 0; i--) {
+        //mencetak angka secara menurun
+        for (int j = i; j >= 1; j--) {
+            cout << j << " ";
+        }
+        cout << "* ";
+        //mencetak angka secara menaik
+        for (int j = 1; j <= i; j++) {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
 ```
 ### Output Unguided 3 :
 
 ##### Output 1
-![Screenshot Output Unguided 3_1](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
+![alt text](output/output-unguided3-modul1.png)
 
-contoh :
-![Screenshot Output Unguided 3_1](https://github.com/DhimazHafizh/2311102151_Muhammad-Dhimas-Hafizh-Fathurrahman/blob/main/Pertemuan1_Modul1/Output-Unguided3-1.png)
-
-##### Output 2
-![Screenshot Output Unguided 3_2](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
-
-penjelasan unguided 3
+1. Input n → pengguna masukkan angka, misalnya 3.
+2. Perulangan luar (for i = n; i >= 0; i--)
+- Loop ini jalan dari n sampai 0.
+- Jadi kalau n = 3, i = 3 → 2 → 1 → 0.
+- Ini yang bikin baris pola turun ke bawah.
+3. Perulangan pertama (for j = i; j >= 1; j--)
+- Cetak angka menurun dari i sampai 1.
+- Contoh i = 3 → cetak 3 2 1.
+4. Cetak tanda *
+- Selalu ada tanda * di tengah tiap baris.
+5. Perulangan kedua (for j = 1; j <= i; j++)
+- Cetak angka naik dari 1 sampai i.
+- Contoh i = 3 → cetak 1 2 3.
+6. cout << endl;
+- Bikin baris baru agar hasilnya kebawah.
 
 ## Kesimpulan
-...
+Mempelajari dasar-dasar bahasa C++ pakai code blocks IDE. Lalu ada operasi aritmatika, logika. perulangan (for, while, do while), dan struct untuk menyimpan data. Mempelajari mandiri seperti operasi bilangan dengan tipe data float, meng konversikan angka ke bentuk tulisan, dan pembuatan pola (mirror).
 
 ## Referensi
-[1] Triase. (2020). Diktat Edisi Revisi : STRUKTUR DATA. Medan: UNIVERSTAS ISLAM NEGERI SUMATERA UTARA MEDAN. 
-<br>[2] Indahyati, Uce., Rahmawati Yunianita. (2020). "BUKU AJAR ALGORITMA DAN PEMROGRAMAN DALAM BAHASA C++". Sidoarjo: Umsida Press. Diakses pada 10 Maret 2024 melalui https://doi.org/10.21070/2020/978-623-6833-67-4.
-<br>...
+[1] Penggunaan Bahasa C++ dalam Perkuliahan Jurusan Teknik Elektro Fakultas Teknik
+
