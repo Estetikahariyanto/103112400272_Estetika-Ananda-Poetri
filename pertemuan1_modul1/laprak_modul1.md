@@ -200,7 +200,7 @@ jadi, struct rapot itu seperti wadah custom  yang isinya hanya ada nama sama nil
 
 ## Unguided 
 
-### 1. (isi dengan soal unguided 1)
+### 1. Buatlah program yang menerima input an dua buah bilangan bertipe float, kemudian memberikan output an hasil penjumlahan, pengurangan, perkalian, dan pembagian dari dua bilangan tersebut.
 
 ```C++
 source code unguided 1
