@@ -231,7 +231,7 @@ int main() {
 ### Output Unguided 1 :
 
 ##### Output 1
-![![C:\ESTETIKA ANANDA\STRUKTUR DATA PRAKTIKUM\103112400272_Estetika-Ananda-Poetri\pertemuan1_modul1\output\output-unguided1-modul1.png](output/output-unguided1-modul1.png)](https://github.com/(username github kalian)/(nama repository github kalian)/blob/main/(path folder menyimpan screenshot output)/(nama file screenshot output).png)
+![alt text](output/output-unguided1-modul1.png)
 
 contoh :
 ![Screenshot Output Unguided 1_1](https://github.com/DhimazHafizh/2311102151_Muhammad-Dhimas-Hafizh-Fathurrahman/blob/main/Pertemuan1_Modul1/Output-Unguided1-1.png)
