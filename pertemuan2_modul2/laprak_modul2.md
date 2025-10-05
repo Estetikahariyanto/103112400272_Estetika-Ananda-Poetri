@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul 2 - Pengenalan Bahas C++ (Bagian Kedua)</h1>
+# <h1 align="center">Laporan Praktikum Modul 2 - Pengenalan Bahasa C++ (Bagian Kedua)</h1>
 <p align="center">Estetika Ananda Poetri Hariyanto - 103112400272</p>
 
 ## Dasar Teori
@@ -260,44 +260,311 @@ Awalnya a = 50, b = 30 → setelah swap: a = 30, b = 50.
 
 ## Unguided 
 
-### 1. ..
+### 1. Buatlah program yang dapat melakukan operasi penjumlahan, pengurangan, dan perkalian matriks 3x3.
 
 ```C++
-..
+#include <iostream>
+using namespace std;
+int main() {
+    int A[3][3], B[3][3], C[3][3];
+    int pilihan;
+    // Input matriks A
+    cout << "Masukkan elemen matriks A (3x3):\n";
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << "A[" << i << "][" << j << "] = ";
+            cin >> A[i][j];
+        }
+    }
+    // Input matriks B
+    cout << "\nMasukkan elemen matriks B (3x3):\n";
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << "B[" << i << "][" << j << "] = ";
+            cin >> B[i][j];
+        }
+    }
+    // Pilihan operasi
+    cout << "\nPilih operasi:\n";
+    cout << "1. Penjumlahan\n";
+    cout << "2. Pengurangan\n";
+    cout << "3. Perkalian\n";
+    cout << "Masukkan pilihan (1-3): ";
+    cin >> pilihan;
+    cout << "\nHasil operasi:\n";
+    if (pilihan == 1) {
+        // Penjumlahan
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                C[i][j] = A[i][j] + B[i][j];
+                cout << C[i][j] << "\t";
+            }
+            cout << endl;
+        }
+    } else if (pilihan == 2) {
+        // Pengurangan
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                C[i][j] = A[i][j] - B[i][j];
+                cout << C[i][j] << "\t";
+            }
+            cout << endl;
+        }
+    } else if (pilihan == 3) {
+        // Perkalian
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                C[i][j] = 0;
+                for (int k = 0; k < 3; k++) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+                cout << C[i][j] << "\t";
+            }
+            cout << endl;
+        }
+    } else {
+        cout << "Pilihan tidak valid!" << endl;
+    }
+    return 0;
+}
 ```
 ### Output Unguided 1 :
 
 ##### Output 1
-![alt text](output/output-unguided1-modul1.png)
+![alt text](output/output-unguided1-modul2.png)
 
-jelasakn
+Input Matriks A dan B =
+Pertama, program akan meminta pengguna untuk memasukkan nilai-nilai elemen dari dua matriks, yaitu matriks A dan matriks B, masing-masing berukuran 3 baris dan 3 kolom.
+Input dilakukan dengan dua perulangan for, yaitu untuk baris (i) dan kolom (j).
 
-### 2. ..
+Menampilkan Menu Operasi =
+Setelah kedua matriks dimasukkan, program menampilkan pilihan operasi:
+1 untuk penjumlahan,
+2 untuk pengurangan, dan
+3 untuk perkalian.
+Pengguna memilih salah satu operasi dengan mengetik angka 1–3.
+
+Proses Perhitungan =
+Berdasarkan pilihan pengguna:
+Jika memilih 1, maka setiap elemen matriks dijumlahkan:
+C[i][j] = A[i][j] + B[i][j]
+
+Jika memilih 2, maka setiap elemen matriks dikurangkan:
+C[i][j] = A[i][j] - B[i][j]
+
+Jika memilih 3, maka dilakukan perkalian matriks dengan rumus:
+C[i][j] = A[i][0]*B[0][j] + A[i][1]*B[1][j] + A[i][2]*B[2][j]
+
+Menampilkan Hasil
+Hasil perhitungan disimpan ke dalam matriks C, lalu ditampilkan di layar dalam bentuk tabel 3x3.
+kalau pilihan tidak valid, program akan menampilkan pesan “Pilihan tidak valid!”.
+
+### 2. Berdasarkan guided pointer dan reference sebelumnya, buatlah keduanya dapat menukar nilai dari 3 variabel.
+
+POINTER
 
 ```C++
-..
+#include <iostream>
+using namespace std;
+
+void tukar3(int *x, int *y, int *z) {
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = *z;
+    *z = temp;
+}
+
+int main() {
+    int a = 10, b = 20, c = 30;
+
+    cout << "sebelum ditukar:" << endl;
+    cout << "a = " << a << ", b = " << b << ", c = " << c << endl;
+
+    tukar3(&a, &b, &c);
+
+    cout << "\nSetelah ditukar (menggunakan pointer):" << endl;
+    cout << "a = " << a << ", b = " << b << ", c = " << c << endl;
+
+    return 0;
+}
+```
+
+REFERENCE
+
+```C++
+#include <iostream>
+using namespace std;
+
+void tukar3(int &x, int &y, int &z) {
+    int temp;
+    temp = x;
+    x = y;
+    y = z;
+    z = temp;
+}
+
+int main() {
+    int a = 10, b = 20, c = 30;
+
+    cout << "sebelum ditukar:" << endl;
+    cout << "a = " << a << ", b = " << b << ", c = " << c << endl;
+
+    tukar3(a, b, c);
+
+    cout << "\nSetelah ditukar (menggunakan reference):" << endl;
+    cout << "a = " << a << ", b = " << b << ", c = " << c << endl;
+
+    return 0;
+}
 ```
 ### Output Unguided 2 :
 
 ##### Output 1
-![alt text](output/output-unguided2-modul1.png)
+![alt text](output/pointerr.cpp.png)
+##### Output 2
+![alt text](output/referencee.cpp.png)
 
-jlskn
+POINTER
+untuk pertukaran nilai ketiga variabel tersebut, yaitu a, b, dan c.
+Ketika program dimulai, permasalahan yang akan dibahas adalah mengganti nilai awal dari ketiga variabel : a=10, b=20, c=30.
+Dan akan menunjukkan nilai masing-masing tiga perusahaan tersebut.
+Sebagai contoh fungsi tukar 3 dipanggil oleh parameter alamat dari sesuatu (&a, &b, &c).
+Fungsi ini memiliki tiga parameter pointer (x, int y, *z bersifat) yang menerima alamat dari ketiganya.
+Di dalam fungsi tukar 3, ketika pointer x, y, z dan ini dilakukan secara bergantian melihat satu sama lain Nilai :
+Nilai a (yang ditunjuk oleh x) disimpan sementara di variabel temp.
+B dipindahkan ke a, c dipindahkan ke b dan nilai awal dari a (yang disimpan dalam temp) dipindahkan ke c.
+Sehingga ketika fungsi itu berjalan, nilai-nilai variabel hasilnya jadilah ini:
+a_berisi nilai lama dari b
+b_berisi nilai lama dari c
+c_berisi nilai lama dari a
+Program kemudian menunjukkan hasil setelah pertukaran.
+Hasil akhir dari program menunjukkan bahwa ketiganya telah bertukar memakan uang secara berpasang-pasangan.
 
-### 3. ..
+REFERENCE
+untuk menukar nilai tiga variabel a, b, dan c. Sama seperti versi pointer, nilai asli a, b, dan c adalah 10, 20, dan 30. Nilai-nilai ini ditampilkan sebelum pertukaran dilakukan. Fungsi tukar 3 memiliki tiga parameter tipe referensi, yaitu int &x, int &y, dan int &z. Ini berarti parameter x, y, dan z secara langsung merujuk ke variabel a, b, dan c masing-masing dalam fungsi utama, bukan salinannya. Di dalam fungsi tukar 3, proses pertukaran pada dasarnya sama dengan versi pointer: a. suatu nilai disimpan di temp; b. nilai b dipindahkan ke a; c. nilai c dipindahkan ke b; d. nilai asli a, yang disimpan di temp, dipindahkan ke c. Setelah fungsi selesai dijalankan, nilai a, b, dan c ditukar secara melingkar. Program kemudian menampilkan nilai-nilai hasil pertukaran, menunjukkan bahwa nilai-nilai tersebut berubah secara langsung dalam variabel asli karena referensi tersebut bertindak sebagai alias dari variabel yang sebenarnya.
+
+### 3. Diketahui sebuah array 1 dimensi sebagai berikut: arrA = (11,8,5,7,12,26,3,54,33,55)
+Buatlah program yang dapat mencari nilai minimum, maksimum, dan rata-rata dari array tersebut! Gunakan function cariMinimum() untuk mencari nilai minimum dan function cariMaksimum() untuk mencari nilai maksimum, serta gunakan prosedur hitungRataRata() untuk menghitung nilai rata-rata! Buat program menggunakan menu switch-case seperti berikut ini:
+Menu Program Array
+1. Tampilkan isi array
+2. cari nilai maksimum
+3. cari nila minimum
+4. Hitung nilai rata rata
 
 ```C++
-..
+#include <iostream>
+using namespace std;
+
+//function untuk mencari apakah nilai minimum
+int cariMinimum(int arr[], int n) {
+    int min = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < min)
+            min = arr[i];
+    }
+    return min;
+}
+
+//function untuk mencari apakah nilai maksimum
+int cariMaksimum(int arr[], int n) {
+    int maks = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > maks)
+            maks = arr[i];
+    }
+    return maks;
+}
+
+//untuk menghitung rata-rata
+void hitungRataRata(int arr[], int n) {
+    float total = 0;
+    for (int i = 0; i < n; i++) {
+        total += arr[i];
+    }
+    float rata = total / n;
+    cout << "Nilai rata-rata: " << rata << endl;
+}
+
+int main() {
+    int arrA[10] = {11, 8, 5, 7, 12, 26, 3, 54, 33, 55};
+    int n = 10;
+    int pilihan;
+
+    do {
+        cout << "\n=== Menu Program Array ===" << endl;
+        cout << "1. Tampilkan isi array" << endl;
+        cout << "2. Cari nilai maksimum" << endl;
+        cout << "3. Cari nilai minimum" << endl;
+        cout << "4. Hitung nilai rata-rata" << endl;
+        cout << "5. Keluar" << endl;
+        cout << "Pilih menu (1-5): ";
+        cin >> pilihan;
+
+        switch (pilihan) {
+            case 1:
+                cout << "Isi array: ";
+                for (int i = 0; i < n; i++) {
+                    cout << arrA[i] << " ";
+                }
+                cout << endl;
+                break;
+
+            case 2:
+                cout << "Nilai maksimum: " << cariMaksimum(arrA, n) << endl;
+                break;
+
+            case 3:
+                cout << "Nilai minimum: " << cariMinimum(arrA, n) << endl;
+                break;
+
+            case 4:
+                hitungRataRata(arrA, n);
+                break;
+
+            case 5:
+                cout << "Terima kasih, program selesai." << endl;
+                break;
+
+            default:
+                cout << "Pilihan tidak valid!" << endl;
+        }
+
+    } while (pilihan != 5);
+
+    return 0;
+}
 ```
 ### Output Unguided 3 :
 
 ##### Output 1
-![alt text](output/output-unguided3-modul1.png)
+![alt text](<output/no 3.png>)
 
-jlskn
+Program ini membantu orang mempelajari cara menggunakan array, fungsi, dan prosedur di C ++.
+penggunaan pendekatan menu dan fungsi terpisah, program menjadi lebih terstruktur, interaktif, dan mudah dibaca.
+Hasil akhirnya menunjukkan bahwa:
+Nilai maksimum = 55
+Nilai minimum = 3
+Nilai rata-rata = 21.4
 
 ## Kesimpulan
-...
+Dari semua percobaan dan program yang sudah kita coba di modul ini, bisa disimpulkan bahwa array, pointer, dan reference adalah konsep dasar yang sangat penting dalam pemrograman C++. Ketiganya saling terkait dan membantu kita mengatur data serta mengelola memori dengan lebih baik. 
+
+1. **Array** itu seperti kotak penyimpanan untuk sekelompok data yang sama jenisnya, semua disatukan dalam satu variabel.
+
+2. **Fungsi dan prosedur** membuat program kita terbagi menjadi bagian-bagian kecil yang rapi. Ini bikin kode lebih **mudah dibaca, terstruktur, dan bisa dipakai ulang** di tempat lain, tanpa harus menulis ulang.
+
+3. **Pointer** adalah cara untuk menyimpan alamat memori dari suatu variabel. Ini berguna untuk **mengubah data langsung di tempatnya**, misalnya menukar nilai dua variabel tanpa perlu mengirim hasil balik dari fungsi.
+
+4. **Reference** (seperti nama lain untuk variabel) mirip dengan pointer, tapi lebih mudah dan aman dipakai karena nggak perlu tanda bintang (*) untuk mengaksesnya. Reference langsung terhubung ke variabel asli, jadi kalau kita ubah reference, variabel aslinya ikut berubah.
+
+5. Dari **latihan terbimbing dan bebas**, kita belajar bahwa:
+   - Array bikin pengelolaan banyak data jadi lebih gampang.
+   - Pointer dan reference membantu kita mengubah data di memori tanpa ribet.
+   - Fungsi membuat program terlihat lebih bersih dan bekerja lebih efisien.
+   - Alat bantu seperti **switch-case** dan **perulangan (looping)** bikin program jadi lebih interaktif dan bisa menanggapi input pengguna dengan dinamis.
+
+Intinya, konsep-konsep ini adalah pondasi utama untuk pemrograman C++ yang terstruktur, terutama dalam mengolah data, mengatur memori, dan membangun program yang modular serta efisien. Dengan memahaminya, kita bisa bikin kode yang lebih kuat dan praktis.
 
 ## Referensi
 [1] [https://osf.io/preprints/osf/mx6cp]
