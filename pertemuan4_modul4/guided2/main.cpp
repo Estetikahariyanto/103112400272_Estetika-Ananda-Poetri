@@ -1,14 +1,11 @@
 #include "list.h"
-
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int main(){
+int main() {
     linkedlist List;
     address nodeA, nodeB, nodeC, nodeD, nodeE = Nil;
     createList(List);
-
-    dataMahasiswa mhs;
 
     nodeA = alokasi("Dhimas", "2311102151", 20);
     nodeB = alokasi("Arvin", "2211110014", 21);
@@ -24,22 +21,22 @@ int main(){
 
     cout << "--- ISI LIST SETELAH DILAKUKAN INSERT ---" << endl;
     printList(List);
-    cout << "jumlah node : " << nbList(List) << endl;
+    cout << "Jumlah node: " << nbList(List) << endl;
     cout << endl;
 
     delFirst(List);
     delLast(List);
-    delAfter(List, nodeD, nodeC);
+    delAfter(List, nodeC, nodeD);
 
     cout << "--- ISI LIST SETELAH DILAKUKAN DELETE ---" << endl;
     printList(List);
-    cout << "jumlah node : " << nbList(List) << endl;
+    cout << "Jumlah node: " << nbList(List) << endl;
     cout << endl;
 
     deleteList(List);
     cout << "--- ISI LIST SETELAH DILAKUKAN HAPUS LIST ---" << endl;
     printList(List);
-    cout << "jumlah node : " << nbList(List) << endl;
+    cout << "Jumlah node: " << nbList(List) << endl;
     cout << endl;
 
     return 0;

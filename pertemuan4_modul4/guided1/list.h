@@ -1,91 +1,37 @@
-#include "list.h"
-#include <iostream>
+#ifndef LIST_H
+#define LIST_H
+
+#include <string>
 using namespace std;
 
-//I.S = Initial State / kondisi awal
-//F.S = Final State / kondisi akhir
+#define Nil nullptr
 
-//fungsi untuk cek apakah list kosong atau tidak
-bool isEmpty(linkedlist List) { // dilihat dari node pertama
-    if(List.first == NULL){
-        return true; 
-    } else {
-        return false;
-    }
-}
+// ====== Struktur Data ======
+struct infotype {
+    string nama;
+    string nim;
+    int umur;
+};
 
-//pembuatan linked list kosong
-void createList(linkedlist &List) {
-    /* I.S. sembarang
-       F.S. terbentuk list kosong */
-    List.first = NULL;
-}
+struct node {
+    infotype isiData;
+    node* next;
+};
 
-//pembuatan node baru dengan menerapkan manajemen memori
-address alokasi(string nama, string nim, int umur) { 
-    /* I.S. sembarang
-       F.S. mengembalikan alamat node baru dengan isidata = sesuai parameter dan next = Nil */
-    address nodeBaru = new node; 
-    nodeBaru->isidata.nama = nama;
-    nodeBaru->isidata.nim = nim; 
-    nodeBaru->isidata.umur = umur;
-    nodeBaru->next = NULL;
-    return nodeBaru;
-}
+typedef node* address;
 
-//penghapusan node dengan menerapkan manajemen memori
-void dealokasi(address &node) {
-    /* I.S. P terdefinisi
-       F.S. memori yang digunakan node dikembalikan ke sistem */
-    node->next = NULL;
-    delete node;
-}
+struct linkedList {
+    address first;
+};
 
-//prosedur-prosedur untuk insert / menambahkan node baru kedalam list
-void insertFirst(linkedlist &List, address nodeBaru) {
-    /* I.S. sembarang, P sudah dialokasikan
-       F.S. menempatkan elemen list (node) pada awal list */
-    nodeBaru->next = List.first; 
-    List.first = nodeBaru;
-}
+// ====== Deklarasi Fungsi & Prosedur ======
+bool isEmpty(linkedList List);
+void createList(linkedList &List);
+address alokasi(string nama, string nim, int umur);
+void dealokasi(address &node);
+void insertFirst(linkedList &List, address nodeBaru);
+void insertAfter(linkedList &List, address nodeBaru, address Prev);
+void insertLast(linkedList &List, address nodeBaru);
+void printList(linkedList List);
 
-void insertAfter(linkedlist &List, address nodeBaru, address Prev) {
-    /* I.S. sembarang, nodeBaru dan Prev alamat salah satu elemen list (node)
-       F.S. menempatkan elemen (node) sesudah elemen node Prev */
-    if (Prev != NULL) {
-        nodeBaru->next = Prev->next;
-        Prev->next = nodeBaru;
-    } else {
-        cout << "Node sebelumnya tidak valid!" << endl;
-    }
-}
-
-void insertLast(linkedlist &List, address nodeBaru) {
-    /* I.S. sembarang, nodeBaru sudah dialokasikan
-       F.S. menempatkan elemen nodeBaru pada akhir list */
-    if (isEmpty(List)) {
-        List.first = nodeBaru;
-    } else {
-        address nodeBantu = List.first;
-        while (nodeBantu->next != NULL) {
-            nodeBantu = nodeBantu->next;
-        }
-        nodeBantu->next = nodeBaru;
-    }
-}
-
-//prosedur untuk menampilkan isi list
-void printList(linkedlist List) {
-    /* I.S. list mungkin kosong
-       F.S. jika list tidak kosong menampilkan semua info yang ada pada list */
-    if (isEmpty(List)) {
-        cout << "List kosong." << endl;
-    } else {
-        address nodeBantu = List.first;
-        while (nodeBantu != NULL) { 
-            cout << "Nama : " << nodeBantu->isidata.nama << ", NIM : " << nodeBantu->isidata.nim 
-            << ", Usia : " << nodeBantu->isidata.umur << endl;
-            nodeBantu = nodeBantu->next;
-        }
-    }
-}
+#endif

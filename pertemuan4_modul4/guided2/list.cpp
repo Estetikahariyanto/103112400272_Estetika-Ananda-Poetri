@@ -1,172 +1,125 @@
 #include "list.h"
-#include <iostream>
-using namespace std;
 
-//I.S = Initial State / kondisi awal
-//F.S = Final State / kondisi akhir
+// =====================
+// FUNGSI DASAR
+// =====================
+void createList(linkedlist &L) {
+    L.first = Nil;
+}
 
-//fungsi untuk cek apakah list kosong atau tidak
-bool isEmpty(linkedlist List) {
-    if(List.first == Nil){
-        return true; 
+bool isEmpty(linkedlist L) {
+    return (L.first == Nil);
+}
+
+address alokasi(string nama, string nim, int umur) {
+    address P = new elmlist;
+    P->info.nama = nama;
+    P->info.nim = nim;
+    P->info.umur = umur;
+    P->next = Nil;
+    return P;
+}
+
+void dealokasi(address &P) {
+    delete P;
+    P = Nil;
+}
+
+// =====================
+// INSERT
+// =====================
+void insertFirst(linkedlist &L, address P) {
+    if (isEmpty(L)) {
+        L.first = P;
     } else {
-        return false;
+        P->next = L.first;
+        L.first = P;
     }
 }
 
-//pembuatan linked list kosong
-void createList(linkedlist &List) {
-    /* I.S. sembarang
-       F.S. terbentuk list kosong */
-    List.first = Nil;
-}
-
-//pembuatan node baru dengan menerapkan manajemen memori
-address alokasi(string nama, string nim, int umur) { 
-    /* I.S. sembarang
-       F.S. mengembalikan alamat node baru dengan isidata = sesuai parameter dan next = Nil */
-    address nodeBaru = new node; 
-    nodeBaru->isidata.nama = nama;
-    nodeBaru->isidata.nim = nim; 
-    nodeBaru->isidata.umur = umur;
-    nodeBaru->next = Nil;
-    return nodeBaru;
-}
-
-//penghapusan node dengan menerapkan manajemen memori
-void dealokasi(address &node) {
-    /* I.S. P terdefinisi
-       F.S. memori yang digunakan node dikembalikan ke sistem */
-    node->next = Nil;
-    delete node;
-}
-
-//prosedur-prosedur untuk insert / menambahkan node baru kedalam list
-void insertFirst(linkedlist &List, address nodeBaru) {
-    /* I.S. sembarang, P sudah dialokasikan
-       F.S. menempatkan elemen list (node) pada awal list */
-    nodeBaru->next = List.first; 
-    List.first = nodeBaru;
-}
-
-void insertAfter(linkedlist &List, address nodeBaru, address Prev) {
-    /* I.S. sembarang, nodeBaru dan Prev alamat salah satu elemen list (node)
-       F.S. menempatkan elemen (node) sesudah elemen node Prev */
-    if (Prev != Nil) {
-        nodeBaru->next = Prev->next;
-        Prev->next = nodeBaru;
+void insertLast(linkedlist &L, address P) {
+    if (isEmpty(L)) {
+        insertFirst(L, P);
     } else {
-        cout << "Node sebelumnya tidak valid!" << endl;
-    }
-}
-
-void insertLast(linkedlist &List, address nodeBaru) {
-    /* I.S. sembarang, nodeBaru sudah dialokasikan
-       F.S. menempatkan elemen nodeBaru pada akhir list */
-    if (isEmpty(List)) {
-        List.first = nodeBaru;
-    } else {
-        address nodeBantu = List.first;
-        while (nodeBantu->next != Nil) {
-            nodeBantu = nodeBantu->next;
+        address Q = L.first;
+        while (Q->next != Nil) {
+            Q = Q->next;
         }
-        nodeBantu->next = nodeBaru;
+        Q->next = P;
     }
 }
 
-//prosedur-prosedur untuk delete / menghapus node yang ada didalam list
-void delFirst(linkedlist &List){
-    /* I.S. list tidak kosong
-    F.S. node pertama di list terhapus*/
-    address nodeHapus;
-    if (isEmpty(List) == false) {
-        nodeHapus = List.first;
-        List.first = List.first->next;
-        nodeHapus->next = Nil;
-        dealokasi(nodeHapus);
-    } else {
-        cout << "List kosong!" << endl;
+void insertAfter(linkedlist &L, address P, address Prec) {
+    if (Prec != Nil) {
+        P->next = Prec->next;
+        Prec->next = P;
     }
 }
 
-void delLast(linkedlist &List){
-    /* I.S. list tidak kosong
-    F.S. node terakhir di list terhapus */
-    address nodeHapus, nodePrev;
-    if(isEmpty(List) == false){
-        nodeHapus = List.first;
-        if(nodeHapus->next == Nil){
-            List.first->next = Nil;
-            dealokasi(nodeHapus);
-        } else { 
-            while(nodeHapus->next != Nil){
-                nodePrev = nodeHapus; 
-                nodeHapus = nodeHapus->next;
-            }
-            nodePrev->next = Nil; 
-            dealokasi(nodeHapus);
-        }
-    } else {
-        cout << "list kosong" << endl;
+// =====================
+// DELETE
+// =====================
+void delFirst(linkedlist &L) {
+    if (!isEmpty(L)) {
+        address P = L.first;
+        L.first = P->next;
+        dealokasi(P);
     }
 }
 
-void delAfter(linkedlist &List, address nodeHapus, address nodePrev){
-    /* I.S. list tidak kosng, Prev alamat salah satu elemen list
-    F.S. nodeBantu adalah alamat dari Prev→next, menghapus Prev→next dari list */
-    if(isEmpty(List) == true){
-        cout << "List kosong!" << endl;
-    } else { //jika list tidak kosong
-        if (nodePrev != Nil && nodePrev->next != Nil) { 
-            nodeHapus = nodePrev->next;       
-            nodePrev->next = nodeHapus->next;  
-            nodeHapus->next = Nil;         
-            dealokasi(nodeHapus);
+void delLast(linkedlist &L) {
+    if (!isEmpty(L)) {
+        if (L.first->next == Nil) {
+            delFirst(L);
         } else {
-            cout << "Node sebelumnya (prev) tidak valid!" << endl;
+            address Q = L.first;
+            while (Q->next->next != Nil) {
+                Q = Q->next;
+            }
+            address P = Q->next;
+            Q->next = Nil;
+            dealokasi(P);
         }
     }
 }
 
-//prosedur untuk menampilkan isi list
-void printList(linkedlist List) {
-    /* I.S. list mungkin kosong
-       F.S. jika list tidak kosong menampilkan semua info yang ada pada list */
-    if (isEmpty(List)) {
+void delAfter(linkedlist &L, address Prec, address P) {
+    if (Prec != Nil && Prec->next != Nil) {
+        P = Prec->next;
+        Prec->next = P->next;
+        dealokasi(P);
+    }
+}
+
+// =====================
+// UTILITAS
+// =====================
+void printList(linkedlist L) {
+    if (isEmpty(L)) {
         cout << "List kosong." << endl;
     } else {
-        address nodeBantu = List.first;
-        while (nodeBantu != Nil) { 
-            cout << "Nama : " << nodeBantu->isidata.nama << ", NIM : " << nodeBantu->isidata.nim << ", Usia : " << nodeBantu->isidata.umur << endl;
-            nodeBantu = nodeBantu->next;
+        address P = L.first;
+        while (P != Nil) {
+            cout << "Nama: " << P->info.nama
+                 << " | NIM: " << P->info.nim
+                 << " | Umur: " << P->info.umur << endl;
+            P = P->next;
         }
     }
 }
 
-//function untuk menampilkan jumlah node didalam list
-int nbList(linkedlist List) {
-    /* I.S. list sudah ada
-       F.S. menampilkan jumlah node didalam list*/
+int nbList(linkedlist L) {
     int count = 0;
-    address nodeBantu = List.first;
-    while (nodeBantu != Nil) {
+    address P = L.first;
+    while (P != Nil) {
         count++;
-        nodeBantu = nodeBantu->next; 
+        P = P->next;
     }
     return count;
 }
 
-//prosedur untuk menghapus list (menghapus semua node didalam list)
-void deleteList(linkedlist &List){
-    /* I.S. list sudah ada
-       F.S. menghapus semua node didalam list*/
-    address nodeBantu, nodeHapus;
-    nodeBantu = List.first;
-    while(nodeBantu != Nil){
-        nodeHapus = nodeBantu;
-        nodeBantu = nodeBantu->next;
-        dealokasi(nodeHapus); 
+void deleteList(linkedlist &L) {
+    while (!isEmpty(L)) {
+        delFirst(L);
     }
-    List.first = Nil; 
-    cout << "List sudah terhapus!" << endl;
 }

@@ -2,56 +2,35 @@
 #include <iostream>
 using namespace std;
 
-//I.S = Initial State / kondisi awal
-//F.S = Final State / kondisi akhir
-
-//fungsi untuk cek apakah list kosong atau tidak
-bool isEmpty(linkedlist List) { // dilihat dari node pertama
-    if(List.first == Nil){
-        return true; 
-    } else {
-        return false;
-    }
+bool isEmpty(linkedList List) {
+    return (List.first == Nil);
 }
 
-//pembuatan linked list kosong
-void createList(linkedlist &List) {
-    /* I.S. sembarang
-       F.S. terbentuk list kosong */
+void createList(linkedList &List) {
     List.first = Nil;
 }
 
-//pembuatan node baru dengan menerapkan manajemen memori
-address alokasi(string nama, string nim, int umur) { 
-    /* I.S. sembarang
-       F.S. mengembalikan alamat node baru dengan isidata = sesuai parameter dan next = Nil */
-    address nodeBaru = new node; 
+address alokasi(string nama, string nim, int umur) {
+    address nodeBaru = new node;
     nodeBaru->isiData.nama = nama;
-    nodeBaru->isiData.nim = nim; 
+    nodeBaru->isiData.nim = nim;
     nodeBaru->isiData.umur = umur;
     nodeBaru->next = Nil;
     return nodeBaru;
 }
 
-//penghapusan node dengan menerapkan manajemen memori
 void dealokasi(address &node) {
-    /* I.S. P terdefinisi
-       F.S. memori yang digunakan node dikembalikan ke sistem */
     node->next = Nil;
     delete node;
+    node = Nil;
 }
 
-//prosedur-prosedur untuk insert / menambahkan node baru kedalam list
 void insertFirst(linkedList &List, address nodeBaru) {
-    /* I.S. sembarang, P sudah dialokasikan
-       F.S. menempatkan elemen list (node) pada awal list */
-    nodeBaru->next = List.first; 
+    nodeBaru->next = List.first;
     List.first = nodeBaru;
 }
 
 void insertAfter(linkedList &List, address nodeBaru, address Prev) {
-    /* I.S. sembarang, nodeBaru dan Prev alamat salah satu elemen list (node)
-       F.S. menempatkan elemen (node) sesudah elemen node Prev */
     if (Prev != Nil) {
         nodeBaru->next = Prev->next;
         Prev->next = nodeBaru;
@@ -61,8 +40,6 @@ void insertAfter(linkedList &List, address nodeBaru, address Prev) {
 }
 
 void insertLast(linkedList &List, address nodeBaru) {
-    /* I.S. sembarang, nodeBaru sudah dialokasikan
-       F.S. menempatkan elemen nodeBaru pada akhir list */
     if (isEmpty(List)) {
         List.first = nodeBaru;
     } else {
@@ -74,19 +51,16 @@ void insertLast(linkedList &List, address nodeBaru) {
     }
 }
 
-//prosedur untuk menampilkan isi list
 void printList(linkedList List) {
-    /* I.S. list mungkin kosong
-       F.S. jika list tidak kosong menampilkan semua info yang ada pada list */
     if (isEmpty(List)) {
         cout << "List kosong." << endl;
     } else {
         address nodeBantu = List.first;
-        while (nodeBantu != Nil) { 
-            cout << "Nama : " << nodeBantu->isiData.nama << ", NIM : " << nodeBantu->isiData.nim 
-            << ", Usia : " << nodeBantu->isiData.umur << endl;
+        while (nodeBantu != Nil) {
+            cout << "Nama : " << nodeBantu->isiData.nama
+                 << ", NIM : " << nodeBantu->isiData.nim
+                 << ", Usia : " << nodeBantu->isiData.umur << endl;
             nodeBantu = nodeBantu->next;
         }
     }
 }
-

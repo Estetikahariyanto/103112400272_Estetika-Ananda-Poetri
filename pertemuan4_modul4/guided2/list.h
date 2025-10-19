@@ -1,40 +1,50 @@
-//Header guard di gunakan untuk mencegah file header yang sama
-//di-include lebih dari sekalai dalam satu program
 #ifndef LIST_H
 #define LIST_H
-#define LIST nullptr
 
-#include<iostream>
+#include <iostream>
+#include <string>
 using namespace std;
 
-//deklarasi isi data struct mahasiswa 
-struct mahasiswa{
+// =====================
+// TIPE DATA
+// =====================
+#define Nil NULL
+
+struct dataMahasiswa {
     string nama;
     string nim;
     int umur;
 };
 
-typedef mahasiswa dataMahasiswa; //Menebrikan nama alias dataMahasiswa untuk struct mahasiswa
-
-typedef struct node *address; //Mendefinisikan alias address sebagai pointer ke strct node
-
-struct node{ //node untuk isi dari linked listnya, isi setiap node adalah data & pointer next
-    dataMahasiswa isidata;
-    address next;
+struct elmlist {
+    dataMahasiswa info;
+    elmlist* next;
 };
 
-struct linkedlist{ //ini linked list nya
+typedef elmlist* address;
+
+struct linkedlist {
     address first;
 };
 
-//semua function & pprosedur yang akan dipakai
-bool isEmpty(linkedlist List);
-void createList(linkedlist &List);
+// =====================
+// DEKLARASI FUNGSI
+// =====================
+void createList(linkedlist &L);
+bool isEmpty(linkedlist L);
 address alokasi(string nama, string nim, int umur);
-void dealokasi(address &node);
-void printList(linkedlist List);
-// void insertFirst(linkedlist &List, address nodeBaru);
-// void insertAfter(linkedlist &List, address nodeBaru, address Prev);
-// void insertLast(linkedlist &List, address nodeBaru);
+void dealokasi(address &P);
+
+void insertFirst(linkedlist &L, address P);
+void insertLast(linkedlist &L, address P);
+void insertAfter(linkedlist &L, address P, address Prec);
+
+void delFirst(linkedlist &L);
+void delLast(linkedlist &L);
+void delAfter(linkedlist &L, address Prec, address P);
+
+void printList(linkedlist L);
+int nbList(linkedlist L);
+void deleteList(linkedlist &L);
 
 #endif

@@ -1,26 +1,20 @@
-#include<iostream>
+#include "list.h"
+#include <iostream>
 using namespace std;
 
-int main(){
-    linkedlist List;
-    address nodeA, nodeB, nodeC, nodeD, nodeE = Nil;
+int main() {
+    linkedList List;
     createList(List);
 
-    dataMahasiswa mhs;
+    address m1 = alokasi("Andi", "12345", 20);
+    address m2 = alokasi("Budi", "67890", 21);
+    address m3 = alokasi("Citra", "11223", 19);
 
-    nodeA = alokasi("Dhimas", "2311102151", 20);
-    nodeB = alokasi("Arvin", "2211110014", 21);
-    nodeC = alokasi("Rizal", "2311110029", 20);
-    nodeD = alokasi("Satrio", "2211102173", 21);
-    nodeE = alokasi("Joshua", "2311102133", 21);
+    insertFirst(List, m1);      // Andi di awal
+    insertLast(List, m2);       // Budi di akhir
+    insertAfter(List, m3, m1);  // Citra setelah Andi
 
-    insertFirst(List, nodeA);
-    insertLast(List, nodeB);
-    insertAfter(List, nodeC, nodeA);
-    insertAfter(List, nodeD, nodeC);
-    insertLast(List, nodeE);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN INSERT ---" << endl;
+    cout << "Isi Linked List Mahasiswa:\n";
     printList(List);
 
     return 0;
