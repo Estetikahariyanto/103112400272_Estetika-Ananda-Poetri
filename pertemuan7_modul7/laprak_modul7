@@ -737,52 +737,359 @@ setelah dibalik [TOP] 3 4 2 9
 
 main.cpp
 ```C++
-..
+#include <iostream>
+#include "stack.h"
+using namespace std;
+
+int main() {
+    cout << "Hello world!" << endl;
+
+    Stack S;
+    createStack(S);
+
+    pushAscending(S, 3);
+    pushAscending(S, 4);
+    pushAscending(S, 8);
+    pushAscending(S, 2);
+    pushAscending(S, 3);
+    pushAscending(S, 9);
+
+    printInfo(S);
+
+    cout << "balik stack" << endl;
+    balikStack(S);
+    printInfo(S);
+
+    return 0;
+}
 ```
 
-main.cpp
+stack.cpp
 ```C++
-..
+#include "stack.h"
+#include <iostream>
+using namespace std;
+
+void createStack(Stack &S) {
+    S.top = -1;
+}
+
+bool isEmpty(Stack S) {
+    return S.top == -1;
+}
+
+bool isFull(Stack S) {
+    return S.top == MAX - 1;
+}
+
+void push(Stack &S, int x) {
+    if (!isFull(S)) {
+        S.top++;
+        S.data[S.top] = x;
+    } else {
+        cout << "Stack penuh!" << endl;
+    }
+}
+
+void pop(Stack &S, int &x) {
+    if (!isEmpty(S)) {
+        x = S.data[S.top];
+        S.top--;
+    } else {
+        cout << "Stack kosong!" << endl;
+    }
+}
+
+void printInfo(Stack S) {
+    cout << "[TOP] ";
+    for (int i = S.top; i >= 0; i--) {
+        cout << S.data[i] << " ";
+    }
+    cout << endl;
+}
+
+void pushAscending(Stack &S, int x) {
+    Stack temp;
+    createStack(temp);
+    int y;
+
+    while (!isEmpty(S) && S.data[S.top] < x) {
+        pop(S, y);
+        push(temp, y);
+    }
+
+    push(S, x);
+
+    while (!isEmpty(temp)) {
+        pop(temp, y);
+        push(S, y);
+    }
+}
+
+void balikStack(Stack &S) {
+    Stack temp;
+    createStack(temp);
+    int x;
+
+    while (!isEmpty(S)) {
+        pop(S, x);
+        push(temp, x);
+    }
+    S = temp;
+}
 ```
 
-main.cpp
+stack.h
 ```C++
-..
+#ifndef STACK_H
+#define STACK_H
+
+#define MAX 10
+
+struct Stack {
+    int data[MAX];
+    int top;
+};
+
+void createStack(Stack &S);
+bool isEmpty(Stack S);
+bool isFull(Stack S);
+void push(Stack &S, int x);
+void pop(Stack &S, int &x);
+void printInfo(Stack S);
+
+void pushAscending(Stack &S, int x);
+void balikStack(Stack &S);
+
+#endif
 ```
 
 ### Output Unguided 2 :
 
 ##### Output 1
+![alt text](outputdansoal/output2.png)
+
+Program ini menggunakan struktur data Stack (tumpukan), tapi dengan variasi prosedur khusus bernama pushAscending.
+Tujuannya:
+Setiap kali kita menambahkan data baru ke Stack, maka nilainya tetap tersusun menaik (ascending) dari bawah ke atas.
+
+Cara Kerja pushAscending(Stack &S, int x)
+Prosedur ini memasukkan elemen x ke Stack S, tetapi tetap menjaga agar urutan nilainya menaik dari bawah ke atas.
+1. Buat stack sementara (temp) untuk menyimpan data sementara.
+Stack temp;
+createStack(temp);
+int y;
+
+2. Pindahkan elemen dari Stack utama ke temp selama elemen di atas lebih kecil dari x.
+Tujuannya: mencari posisi yang tepat untuk menempatkan x.
+while (!isEmpty(S) && S.data[S.top] < x) {
+    pop(S, y);
+    push(temp, y);
+}
+
+3. Masukkan elemen x ke Stack utama.
+push(S, x);
+
+4. Kembalikan semua elemen dari temp ke Stack utama.
+while (!isEmpty(temp)) {
+    pop(temp, y);
+    push(S, y);
+}
 
 
-jlskn
+-> Prosedur balikStack(Stack &S)
+Ini untuk membalik urutan elemen di dalam stack.
+Digunakan agar tampilan stack bisa menunjukkan urutan menaik dari atas ke bawah.
 
-### 3. ..
+void balikStack(Stack &S) {
+    Stack temp;
+    createStack(temp);
+    int x;
+    while (!isEmpty(S)) {
+        pop(S, x);
+        push(temp, x);
+    }
+    S = temp;
+}
 
-listKendaraan.cpp
+- pushAscending = versi khusus push yang menjaga urutan nilai di stack tetap menaik.
+- balikStack digunakan untuk membalik tampilan agar terlihat dari kecil ke besar.
+- Hasil akhir memperlihatkan bagaimana stack bisa diatur agar tetap terurut meskipun menggunakan prinsip LIFO.
+
+### 3. ![alt text](outputdansoal/soal3.png)
+
+stack.cpp
 ```C++
+#include <iostream>
+#include "stack.h"
+using namespace std;
 
+void createStack(Stack &S) {
+    S.top = -1;
+}
+
+bool isFull(Stack S) {
+    return S.top == MAX - 1;
+}
+
+bool isEmpty(Stack S) {
+    return S.top == -1;
+}
+
+void push(Stack &S, char data) {
+    if (!isFull(S)) {
+        S.top++;
+        S.isi[S.top] = data;
+    } else {
+        cout << "Stack penuh, tidak bisa push." << endl;
+    }
+}
+
+void pop(Stack &S, char &data) {
+    if (!isEmpty(S)) {
+        data = S.isi[S.top];
+        S.top--;
+    } else {
+        cout << "Stack kosong, tidak bisa pop." << endl;
+    }
+}
+
+void printInfo(Stack S) {
+    cout << "[TOP] ";
+    for (int i = S.top; i >= 0; i--) {
+        cout << S.isi[i] << " ";
+    }
+    cout << endl;
+}
+
+void balikStack(Stack &S) {
+    Stack temp;
+    createStack(temp);
+    char x;
+    while (!isEmpty(S)) {
+        pop(S, x);
+        push(temp, x);
+    }
+    S = temp;
+}
+
+void getInputStream(Stack &S) {
+    char c;
+    cout << "Masukkan input: ";
+    while (true) {
+        c = cin.get();       
+        if (c == '\n') break; 
+        push(S, c);         
+    }
+}
 ```
 
-listKendaraan.h
+stack.h
 ```C++
+#ifndef STACK_H
+#define STACK_H
+#define MAX 50
 
+struct Stack {
+    char isi[MAX];
+    int top;
+};
+
+void createStack(Stack &S);
+bool isFull(Stack S);
+bool isEmpty(Stack S);
+void push(Stack &S, char data);
+void pop(Stack &S, char &data);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+void getInputStream(Stack &S);
+
+#endif
 ```
 
 main.cpp
 ```C++
+#include <iostream>
+#include "stack.h"
+using namespace std;
 
+int main() {
+    cout << "Hello world!" << endl;
+    Stack S;
+    createStack(S);
+
+    getInputStream(S);
+    printInfo(S);
+
+    cout << "balik stack" << endl;
+    balikStack(S);
+    printInfo(S);
+
+    return 0;
+}
 ```
 
 ### Output Unguided 3 :
 
 ##### Output 1
-![alt..
+![alt text](outputdansoal/output3.png)
 
-jlskn
+Program ini menunjukkan:
+Cara kerja stack berbasis array
+Operasi dasar: push, pop, isFull, isEmpty
+Tambahan operasi: balikStack dan getInputStream
+Cara membalik urutan karakter yang dimasukkan user menggunakan struktur stack.
+
+Alur Program:
+Menampilkan pesan “Hello world!”
+Membuat stack kosong S
+Memanggil getInputStream() → user memasukkan teks
+Menampilkan isi stack (terbalik dari urutan input)
+Membalik isi stack menggunakan balikStack()
+Menampilkan hasil stack yang sudah dibalik lagi
 
 ## Kesimpulan
-..
+Dari semua percobaan yang sudah dilakukan, bisa disimpulkan bahwa stack adalah salah
+satu struktur data yang cara kerjanya seperti tumpukan barang
+data yang terakhir dimasukkan akan jadi yang pertama diambil.
+
+Stack bisa dibuat dengan dua cara :
+1. Menggunakan Linked List, yang bisa menampung data sebanyak apa pun.
+2. Menggunakan Array, yang jumlah datanya terbatas sesuai kapasitas yang ditentukan.
+
+Guided 1
+Menunjukkan cara membuat stack dengan linked list.
+Program ini bisa menambah (push), menghapus (pop), memperbarui (update), melihat isi stack (view),
+dan mencari data (search). Kelebihannya: tidak ada batasan jumlah data.
+
+Guided 2
+Membuat stack menggunakan array.
+Operasinya sama seperti Guided 1, tapi ini jumlah datanya dibatasi oleh ukuran maksimum.
+cara menghitung posisi data dari elemen paling atas.
+
+Unguided 1
+Menambahkan fungsi `balikStack()` untuk membalik urutan isi stack.
+Ini berguna kalau kita mau menampilkan data dari bawah ke atas.
+
+Unguided 2
+Memiliki fungsi baru `pushAscending()`
+fungsinya untuk menambahkan data ke stack tapi tetap menjaga agar
+urutannya menaik dari kecil ke besar. Jadi, tidak hanya sekadar menumpuk data,
+tapi juga menjaga urutan nilainya.
+
+Unguided 3
+Mengajarkan cara membalik teks yang diketik oleh pengguna menggunakan stack.
+Misalnya, kalau pengguna mengetik “ABC”, maka hasil balikannya jadi “CBA”.
+
+-> Stack bekerja dengan cara mengambil data terakhir yang masuk terlebih dahulu.
+-> Operasi dasarnya seperti push, pop, isEmpty, dan isFull sangat penting.
+-> Stack sering dipakai dalam berbagai kasus nyata, seperti:
+  - proses  undo di aplikasi,
+  - pembalikan teks atau data,
+  - pemanggilan fungsi rekursi, dan
+  - evaluasi ekspresi matematika.
+-> Stack dengan linked list lebih fleksibel karena bisa menampung data tanpa batas,
+sedangkan yang array lebih sederhana tapi kapasitasnya terbatas.
 
 ## Referensi
 [1] [https://bakrie.ac.id/articles/552-kenalan-dengan-pengertian-stack-dalam-pemrograman.html]
