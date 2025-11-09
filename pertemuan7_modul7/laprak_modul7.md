@@ -1036,17 +1036,20 @@ int main() {
 
 Program ini menunjukkan:
 Cara kerja stack berbasis array
+
 Operasi dasar: push, pop, isFull, isEmpty
+
 Tambahan operasi: balikStack dan getInputStream
 Cara membalik urutan karakter yang dimasukkan user menggunakan struktur stack.
 
 Alur Program:
-Menampilkan pesan “Hello world!”
-Membuat stack kosong S
-Memanggil getInputStream() → user memasukkan teks
-Menampilkan isi stack (terbalik dari urutan input)
-Membalik isi stack menggunakan balikStack()
-Menampilkan hasil stack yang sudah dibalik lagi
+
+1. Menampilkan pesan “Hello world!”
+2. Membuat stack kosong S.
+3. Memanggil getInputStream() → user memasukkan teks.
+4. Menampilkan isi stack (terbalik dari urutan input).
+5. Membalik isi stack menggunakan balikStack().
+6. Menampilkan hasil stack yang sudah dibalik lagi.
 
 ## Kesimpulan
 Dari semua percobaan yang sudah dilakukan, bisa disimpulkan bahwa stack adalah salah
@@ -1058,37 +1061,45 @@ Stack bisa dibuat dengan dua cara :
 2. Menggunakan Array, yang jumlah datanya terbatas sesuai kapasitas yang ditentukan.
 
 Guided 1
+
 Menunjukkan cara membuat stack dengan linked list.
 Program ini bisa menambah (push), menghapus (pop), memperbarui (update), melihat isi stack (view),
 dan mencari data (search). Kelebihannya: tidak ada batasan jumlah data.
 
 Guided 2
+
 Membuat stack menggunakan array.
 Operasinya sama seperti Guided 1, tapi ini jumlah datanya dibatasi oleh ukuran maksimum.
 cara menghitung posisi data dari elemen paling atas.
 
 Unguided 1
+
 Menambahkan fungsi `balikStack()` untuk membalik urutan isi stack.
 Ini berguna kalau kita mau menampilkan data dari bawah ke atas.
 
 Unguided 2
+
 Memiliki fungsi baru `pushAscending()`
 fungsinya untuk menambahkan data ke stack tapi tetap menjaga agar
 urutannya menaik dari kecil ke besar. Jadi, tidak hanya sekadar menumpuk data,
 tapi juga menjaga urutan nilainya.
 
 Unguided 3
+
 Mengajarkan cara membalik teks yang diketik oleh pengguna menggunakan stack.
 Misalnya, kalau pengguna mengetik “ABC”, maka hasil balikannya jadi “CBA”.
 
 -> Stack bekerja dengan cara mengambil data terakhir yang masuk terlebih dahulu.
+
 -> Operasi dasarnya seperti push, pop, isEmpty, dan isFull sangat penting.
+
 -> Stack sering dipakai dalam berbagai kasus nyata, seperti:
   - proses  undo di aplikasi,
   - pembalikan teks atau data,
   - pemanggilan fungsi rekursi, dan
   - evaluasi ekspresi matematika.
--> Stack dengan linked list lebih fleksibel karena bisa menampung data tanpa batas,
+  
+  -> Stack dengan linked list lebih fleksibel karena bisa menampung data tanpa batas,
 sedangkan yang array lebih sederhana tapi kapasitasnya terbatas.
 
 ## Referensi
