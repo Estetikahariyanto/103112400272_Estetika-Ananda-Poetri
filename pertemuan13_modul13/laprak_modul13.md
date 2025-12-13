@@ -135,7 +135,7 @@ void deleteFirstParent(listInduk &LInduk){
         cout << "List Induk kosong!" << endl;
     } else {
         NodeParent nodeHapus = LInduk.first;
-        if (LInduk.first == LInduk.last) { // KASUS KHUSUS 1 ELEMEN
+        if (LInduk.first == LInduk.last) { 
             LInduk.first = NULL;
             LInduk.last = NULL;
         } else {
